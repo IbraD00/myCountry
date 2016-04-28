@@ -5,43 +5,40 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-
-    private TextView mainTxv;
+    Country country = new Country();
+    Country.CountryType[] response = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainTxv = (TextView) findViewById(R.id.textView);
-
-        Country country = new Country();
-        Country.CountryType[] response = null;
-
         try {
-            if(networkAvailable()) {
+           // if(networkAvailable()) {
                 response = country.run();
-            }
+            //}
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String cities = null;
-
         if (response != null) {
-            for (Country.CountryType item : response) {
-                System.out.println(item.name);
-                cities += item.name + " ";
+            String[] countryArray = new String[response.length];
+            for (int i = 0; i < response.length; i++) {
+                countryArray[i] = response[i].name;
+            }
+            ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_main,R.id.textView, countryArray);
+
+            ListView listView = (ListView) findViewById(R.id.listView);
+            if (listView != null) {
+                listView.setAdapter(adapter);
             }
         }
-        System.out.println(cities);
-        mainTxv.setText(cities);
     }
 
     private boolean networkAvailable() {
