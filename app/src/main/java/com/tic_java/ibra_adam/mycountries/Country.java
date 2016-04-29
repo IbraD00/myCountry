@@ -20,17 +20,11 @@ import okhttp3.Response;
  * Created by IbraD00 & Adm94 on 28/04/2016.
  */
 public class Country {
-    private static final int Asia = 1;
-    private static final int Europe = 2;
-    private static final int Usa = 3;
-    private static final int Afrique = 4;
-
-
     private final OkHttpClient client = new OkHttpClient();
     protected static CountryType[] data;
     private final Gson gson = new Gson();
 
-    public ArrayList<String> run(String region) throws Exception {
+    public Map<String, ArrayList<CountryType>> run(String region) throws Exception {
         Request request = new Request.Builder()
                 .url("https://restcountries-v1.p.mashape.com/all")
                 .header("X-Mashape-Key", "BD4xOiVqPumshYypkX11bqtcVsiap1h1abZjsnShGKIuzED3cY")
@@ -57,36 +51,37 @@ public class Country {
             }
         });
 
-        Map<String, ArrayList<String>> response = this.getRegion(Country.data);
+        Map<String, ArrayList<CountryType>> response = this.getRegion(Country.data);
 
-        return response.get(region);
+        return response;
     }
 
-    public Map<String, ArrayList<String>> getRegion(CountryType[] data)
+    public Map<String, ArrayList<CountryType>> getRegion(CountryType[] data)
     {
-        Map<String, ArrayList<String>> region = new ArrayMap<>();
-        ArrayList<String> americas = new ArrayList<>();
-        ArrayList<String> asia = new ArrayList<>();
-        ArrayList<String> europe = new ArrayList<>();
-        ArrayList<String> africa = new ArrayList<>();
-        ArrayList<String> oceania = new ArrayList<>();
+        Map<String, ArrayList<CountryType>> region = new ArrayMap<>();
+
+        ArrayList americas = new ArrayList<>();
+        ArrayList asia = new ArrayList<>();
+        ArrayList europe = new ArrayList<>();
+        ArrayList africa = new ArrayList<>();
+        ArrayList oceania = new ArrayList<>();
 
         for (CountryType item : data) {
             switch (item.region) {
                 case "Americas":
-                    americas.add(item.name);
+                    americas.add(item);
                     break;
                 case "Asia":
-                    asia.add(item.name);
+                    asia.add(item);
                     break;
                 case "Europe":
-                    europe.add(item.name);
+                    europe.add(item);
                     break;
                 case "Africa":
-                    africa.add(item.name);
+                    africa.add(item);
                     break;
                 case "Oceania":
-                    oceania.add(item.name);
+                    oceania.add(item);
                     break;
             }
         }
@@ -104,5 +99,6 @@ public class Country {
         String name;
         String capital;
         String region;
+        String population;
     }
 }

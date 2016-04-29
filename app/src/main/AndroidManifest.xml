@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListCountry" />
+        <activity android:name=".ViewCountry"></activity>
     </application>
 
 </manifest>
