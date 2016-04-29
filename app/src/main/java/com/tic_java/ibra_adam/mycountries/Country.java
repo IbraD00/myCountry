@@ -54,13 +54,14 @@ public class Country {
                 Reader stream = response.body().charStream();
 
                 Country.data = gson.fromJson(stream, CountryType[].class);
+                System.out.println(Country.data);
 
             }
         });
 
         Map<String, ArrayList<String>> response = this.getRegion(Country.data);
 
-        System.out.println(response.get("Asia").get(0));
+        System.out.println(response);
 
         return response;
     }
@@ -75,8 +76,6 @@ public class Country {
         ArrayList<String> oceania = new ArrayList<>();
 
         for (CountryType item : data) {
-            System.out.println(item.region);
-
             switch (item.region) {
                 case "americas":
                     americas.add(item.name);

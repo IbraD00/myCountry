@@ -9,26 +9,57 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.tic_java.ibra_adam.mycountries.MainActivity">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:choiceMode="none"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView"
-        android:layout_alignTop="@+id/listView"
         android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="Continent"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amérique"
+        android:id="@+id/Americas"
+        android:layout_above="@+id/Europe"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Afrique"
+        android:id="@+id/Africa"
+        android:layout_alignTop="@+id/Americas"
+        android:layout_toStartOf="@+id/scrollView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Asie"
+        android:id="@+id/Asia"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Oceanie"
+        android:id="@+id/Oceania"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/Africa" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Europe"
+        android:id="@+id/Europe"
+        android:layout_above="@+id/Asia"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
