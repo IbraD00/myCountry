@@ -22,5 +22,4 @@
         android:id="@+id/listCountryTextView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-
 </RelativeLayout>

@@ -26,7 +26,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Amérique"
+        android:text="Americas"
         android:id="@+id/Americas"
         android:layout_above="@+id/Europe"
         android:layout_alignParentStart="true" />
@@ -34,7 +34,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Afrique"
+        android:text="Africa"
         android:id="@+id/Africa"
         android:layout_alignTop="@+id/Americas"
         android:layout_toStartOf="@+id/scrollView" />
@@ -42,7 +42,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Asie"
+        android:text="Asia"
         android:id="@+id/Asia"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
@@ -50,7 +50,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Oceanie"
+        android:text="Oceania"
         android:id="@+id/Oceania"
         android:layout_centerVertical="true"
         android:layout_alignEnd="@+id/Africa" />
