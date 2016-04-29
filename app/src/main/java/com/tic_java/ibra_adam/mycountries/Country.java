@@ -30,7 +30,7 @@ public class Country {
     protected static CountryType[] data;
     private final Gson gson = new Gson();
 
-    public CountryType[] run() throws Exception {
+    public Map<String, ArrayList<String>> run() throws Exception {
         Request request = new Request.Builder()
                 .url("https://restcountries-v1.p.mashape.com/all")
                 .header("X-Mashape-Key", "BD4xOiVqPumshYypkX11bqtcVsiap1h1abZjsnShGKIuzED3cY")
@@ -60,15 +60,15 @@ public class Country {
 
         Map<String, ArrayList<String>> response = this.getRegion(Country.data);
 
-        System.out.println(response);
+        System.out.println(response.get("Asia").get(0));
 
-        return Country.data;
+        return response;
     }
 
     public Map<String, ArrayList<String>> getRegion(CountryType[] data)
     {
         Map<String, ArrayList<String>> region = new ArrayMap<>();
-        ArrayList<String> usa = new ArrayList<>();
+        ArrayList<String> americas = new ArrayList<>();
         ArrayList<String> asia = new ArrayList<>();
         ArrayList<String> europe = new ArrayList<>();
         ArrayList<String> africa = new ArrayList<>();
@@ -78,8 +78,8 @@ public class Country {
             System.out.println(item.region);
 
             switch (item.region) {
-                case "Americas":
-                    usa.add(item.name);
+                case "americas":
+                    americas.add(item.name);
                     break;
                 case "Asia":
                     asia.add(item.name);
@@ -97,7 +97,7 @@ public class Country {
         }
 
         region.put("Asia", asia);
-        region.put("Americas", usa);
+        region.put("Americas", americas);
         region.put("Europe", europe);
         region.put("Africa", africa);
         region.put("Oceania", oceania);

@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 
 public class MainActivity extends AppCompatActivity {
-    Country.CountryType[] response;
+    Map<String, ArrayList<String>> response;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,16 +32,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (response != null) {
             System.out.println("Yeeeeees");
-            String[] countryArray = new String[response.length];
-
-            for (int i = 0; i < response.length; i++) {
-                countryArray[i] = response[i].name;
-             //   System.out.println(response[i].region);
-            }
+            String[] countryArray = new String[5];
+            countryArray[0] = "Asie";
+            countryArray[1] = "Amerique";
+            countryArray[2] = "Afrique";
+            countryArray[3] = "Europe";
+            countryArray[4] = "Océanie";
 
             ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_main,R.id.textView, countryArray);
             ListView listView = (ListView) findViewById(R.id.listView);
-
             if (listView != null) {
                 listView.setAdapter(adapter);
             }
