@@ -1,12 +1,9 @@
 package com.tic_java.ibra_adam.mycountries;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class ViewCountry extends AppCompatActivity {
     TextView textView;
