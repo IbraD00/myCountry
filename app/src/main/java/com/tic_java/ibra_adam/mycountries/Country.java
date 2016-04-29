@@ -30,7 +30,7 @@ public class Country {
     protected static CountryType[] data;
     private final Gson gson = new Gson();
 
-    public Map<String, ArrayList<String>> run() throws Exception {
+    public ArrayList<String> run(String region) throws Exception {
         Request request = new Request.Builder()
                 .url("https://restcountries-v1.p.mashape.com/all")
                 .header("X-Mashape-Key", "BD4xOiVqPumshYypkX11bqtcVsiap1h1abZjsnShGKIuzED3cY")
@@ -47,23 +47,19 @@ public class Country {
                 if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
                 Headers responseHeaders = response.headers();
+
                 for (int i = 0, size = responseHeaders.size(); i < size; i++) {
                     System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
                 }
 
                 Reader stream = response.body().charStream();
-
                 Country.data = gson.fromJson(stream, CountryType[].class);
-                System.out.println(Country.data);
-
             }
         });
 
         Map<String, ArrayList<String>> response = this.getRegion(Country.data);
 
-        System.out.println(response);
-
-        return response;
+        return response.get(region);
     }
 
     public Map<String, ArrayList<String>> getRegion(CountryType[] data)
@@ -77,13 +73,14 @@ public class Country {
 
         for (CountryType item : data) {
             switch (item.region) {
-                case "americas":
+                case "Americas":
                     americas.add(item.name);
                     break;
                 case "Asia":
                     asia.add(item.name);
                     break;
                 case "Europe":
+                    System.out.println(item.name);
                     europe.add(item.name);
                     break;
                 case "Africa":
