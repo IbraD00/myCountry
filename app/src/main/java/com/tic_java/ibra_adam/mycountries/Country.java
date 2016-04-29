@@ -1,9 +1,13 @@
 package com.tic_java.ibra_adam.mycountries;
 
+import android.util.ArrayMap;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -16,6 +20,12 @@ import okhttp3.Response;
  * Created by IbraD00 & Adm94 on 28/04/2016.
  */
 public class Country {
+    private static final int Asia = 1;
+    private static final int Europe = 2;
+    private static final int Usa = 3;
+    private static final int Afrique = 4;
+
+
     private final OkHttpClient client = new OkHttpClient();
     protected static CountryType[] data;
     private final Gson gson = new Gson();
@@ -44,14 +54,60 @@ public class Country {
                 Reader stream = response.body().charStream();
 
                 Country.data = gson.fromJson(stream, CountryType[].class);
+
             }
         });
 
+        Map<String, ArrayList<String>> response = this.getRegion(Country.data);
+
+        System.out.println(response);
+
         return Country.data;
+    }
+
+    public Map<String, ArrayList<String>> getRegion(CountryType[] data)
+    {
+        Map<String, ArrayList<String>> region = new ArrayMap<>();
+        ArrayList<String> usa = new ArrayList<>();
+        ArrayList<String> asia = new ArrayList<>();
+        ArrayList<String> europe = new ArrayList<>();
+        ArrayList<String> africa = new ArrayList<>();
+        ArrayList<String> oceania = new ArrayList<>();
+
+        for (CountryType item : data) {
+            System.out.println(item.region);
+
+            switch (item.region) {
+                case "Americas":
+                    usa.add(item.name);
+                    break;
+                case "Asia":
+                    asia.add(item.name);
+                    break;
+                case "Europe":
+                    europe.add(item.name);
+                    break;
+                case "Africa":
+                    africa.add(item.name);
+                    break;
+                case "Oceania":
+                    oceania.add(item.name);
+                    break;
+            }
+        }
+
+        region.put("Asia", asia);
+        region.put("Americas", usa);
+        region.put("Europe", europe);
+        region.put("Africa", africa);
+        region.put("Oceania", oceania);
+
+        return region;
     }
 
     static class CountryType {
         String name;
         String capital;
+        String region;
     }
 }

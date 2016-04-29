@@ -10,35 +10,37 @@ import android.widget.ListView;
 
 
 public class MainActivity extends AppCompatActivity {
-    Country country = new Country();
-    Country.CountryType[] response = null;
-
+    Country.CountryType[] response;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         try {
             if(networkAvailable()) {
+                Country country = new Country();
                 response = country.run();
+
             }
         } catch (Exception e) {
             e.printStackTrace();
+
         }
 
         if (response != null) {
+            System.out.println("Yeeeeees");
             String[] countryArray = new String[response.length];
-            System.out.println(response.length);
+
             for (int i = 0; i < response.length; i++) {
                 countryArray[i] = response[i].name;
-                System.out.println(response[i].name);
+             //   System.out.println(response[i].region);
             }
-            System.out.println(response);
+
             ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_main,R.id.textView, countryArray);
             ListView listView = (ListView) findViewById(R.id.listView);
 
             if (listView != null) {
                 listView.setAdapter(adapter);
-                System.out.println("YES");
             }
         }else {
             System.out.println("BAD");
