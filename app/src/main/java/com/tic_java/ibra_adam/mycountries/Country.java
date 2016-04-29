@@ -80,7 +80,6 @@ public class Country {
                     asia.add(item.name);
                     break;
                 case "Europe":
-                    System.out.println(item.name);
                     europe.add(item.name);
                     break;
                 case "Africa":
